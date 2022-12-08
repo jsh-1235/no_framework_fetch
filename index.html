@@ -11,34 +11,14 @@
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <script type="module" defer>
-    import area from "./area.js";
+    import sum from "./public/sum.js";
 
     window.onload = (e) => {
-      // document.querySelector("#title").textContent = `${area(10, 20)} cm2`;
+      const button = document.getElementById("button").addEventListener("click", (e) => {
+        handleOnClick();
+      })
     };
-  </script>
-</head>
 
-<body>
-  <div id="header">
-    <span id="title">Header</span>
-    <button onClick="handleOnClick()">Call</button>
-  </div>
-  <hr />
-  <div id="container">
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>NAME</th>
-          <th>EMAIL</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
-
-  <script>
     function handleOnClick() {
       const table = document.querySelector("table");
 
@@ -47,6 +27,8 @@
       axios
         .get("https://jsonplaceholder.typicode.com/users")
         .then(function (response) {
+          console.table(response.data);
+
           tbody.innerHTML = "";
 
           response.data.forEach((value) => {
@@ -59,6 +41,8 @@
 
             tbody.innerHTML += row;
           });
+
+          document.querySelector("#sum").textContent = `${table.rows.lengt - 1}`;
         })
         .catch(function (error) {
           console.log(error);
@@ -68,6 +52,30 @@
         });
     }
   </script>
+</head>
+
+<body>
+  <div id="header">
+    <span id="title">Header</span>
+  </div>
+  <hr />
+  <div id="container">
+    <div style="align-self: flex-end">
+      <span id="sum"></span>
+      <!-- <button onClick="handleOnClick()">Call</button> -->
+      <button id="button">Call</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>EMAIL</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 </body>
 
 </html>
