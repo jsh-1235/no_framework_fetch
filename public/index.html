@@ -2,43 +2,72 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Document</title>
   <link rel="stylesheet" href="./style.css" />
   <script type="module" src="./index.js" defer></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   <script type="module" defer>
-
     import area from "./area.js";
 
     window.onload = (e) => {
-      console.log("...");
+      // document.querySelector("#title").textContent = `${area(10, 20)} cm2`;
+    };
+  </script>
+</head>
 
-      document.querySelector("#results").textContent = `${area(10, 20)} cm2`;
+<body>
+  <div id="header">
+    <span id="title">Header</span>
+    <button onClick="handleOnClick()">Call</button>
+  </div>
+  <hr />
+  <div id="container">
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>NAME</th>
+          <th>EMAIL</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
-      axios.get('https://jsonplaceholder.typicode.com/todos')
+  <script>
+    function handleOnClick() {
+      const table = document.querySelector("table");
+
+      const tbody = document.querySelector("tbody");
+
+      axios
+        .get("https://jsonplaceholder.typicode.com/users")
         .then(function (response) {
-          console.log(response);
+          tbody.innerHTML = "";
+
+          response.data.forEach((value) => {
+            console.log(value.id, value.name, value.email);
+
+            const row = `
+                <td>${value.id}</td>
+                <td>${value.name}</td>
+                <td>${value.email}</td>`;
+
+            tbody.innerHTML += row;
+          });
         })
         .catch(function (error) {
           console.log(error);
         })
         .finally(function () {
-          console.log("finish")
+          console.log(table.rows.length);
         });
     }
-
   </script>
-</head>
-
-<body>
-  <div id="container">
-    <span id="title">Fetch API</span>
-    <span id="results" style="color:white; margin: 10px">Loading...</span>
-  </div>
 </body>
 
 </html>

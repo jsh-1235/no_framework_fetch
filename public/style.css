@@ -1,6 +1,28 @@
-#container {
+body {
   width: 100%;
-  height: 100vh;
+  background-color: #34515e;
+  margin: 0;
+  padding: 0;
+}
+
+
+#header {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+
+#title {
+  color: #ffc107;
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+#container {
   margin: 0;
   padding: 0;
   display: flex;
@@ -8,11 +30,17 @@
   justify-content: center;
   align-content: center;
   align-items: center;
-  background-color: #34515e;
 }
 
-#title {
-  color: #ffc107;
-  font-size: 2rem;
-  text-transform: uppercase;
+table {
+  width: 50vw;
+  height: 100%;
+  border: 1px solid white;
+  color: white;
+}
+
+th, tr, td {
+  border: 1px solid white;
+  text-align: center;
+  padding: 10px;
 }
